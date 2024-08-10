@@ -103,9 +103,9 @@ class _CinemaPagesState extends State<CinemaPages> {
                         ],
                       ),
                     ),
-                    )
+                  )
                 : SizedBox(
-                  height: MediaQuery.of(context).size.height / 2.5, 
+                  height: MediaQuery.of(context).size.height / 2.5,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Padding(

@@ -1,3 +1,4 @@
+import 'package:tmdbapp/components/routes_transition.dart';
 import 'package:tmdbapp/views/movies/movies_view.dart';
 import 'package:tmdbapp/view_models/view_models.dart';
 import 'package:tmdbapp/views/auth/login_view.dart';
@@ -21,18 +22,23 @@ class MyApp extends StatelessWidget {
           '/': (context) => const LoginPage(),
         },
         onGenerateRoute: (settings) {
-          if (settings.name == '/home') {
-            return MaterialPageRoute(builder: (context) => const HomePage());
-          } else if (settings.name == '/search') {
-            return MaterialPageRoute(builder: (context) => const ResultsPage());
-          } else if (settings.name == '/detailPlay') {
-            final args = settings.arguments as Map<String, dynamic>;
-            return MaterialPageRoute(builder: (context) => DetailMoviePlayPage(indexes: args['indexes']));
-          } else if (settings.name == '/detailPopular') {
-            final args = settings.arguments as Map<String, dynamic>;
-            return MaterialPageRoute(builder: (context) => DetailMoviePopularPage(indexes: args['indexes']));
+          switch (settings.name) {
+            case '/home':
+              return fadeRoute(page: const HomePage());
+            case '/search':
+              return slideRoute(page: const ResultsPage());
+            case '/detailNowPlaying':
+              final args = settings.arguments as Map<String, dynamic>;
+              return slideRoute(page: DetailMoviePlayPage(indexes: args['indexes']));
+            case '/detailPopular':
+              final args = settings.arguments as Map<String, dynamic>;
+              return slideRoute(page: DetailMoviePopularPage(indexes: args['indexes']));
+            case '/detailSearch':
+              final args = settings.arguments as Map<String, dynamic>;
+              return slideRoute(page: DetailMovieSearchPage(indexes: args['indexes']));
+            default:
+              return null;
           }
-          return null;
         },
         theme: ThemeData(
           colorScheme: const ColorScheme.dark(

@@ -50,10 +50,10 @@ class _ProfilepagesState extends State<Profilepages> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
-              Text('Username: $username', style: TextStyle(fontSize: 18)),
+              const SizedBox(height: 20),
+              Text('Username: $username', style: const TextStyle(fontSize: 18)),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
                   logout();

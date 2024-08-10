@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:tmdbapp/components/cards.dart';
 import 'package:tmdbapp/constant/constant.dart';
@@ -9,7 +8,7 @@ import 'package:tmdbapp/components/app_bars.dart';
 import 'package:tmdbapp/components/search_bars.dart';
 import 'package:tmdbapp/constant/design_system.dart';
 import 'package:tmdbapp/view_models/movies_view_models.dart';
-import 'package:tmdbapp/views/movies/detail_views.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ResultsPage extends StatefulWidget {
   const ResultsPage({super.key});
@@ -127,11 +126,12 @@ class _ResultsPageState extends State<ResultsPage> {
                                     child: ResultsCards(
                                       image: Constant.imagePoster + searchResult[index].posterPath!,
                                       onClick: () {
-                                        Navigator.push(
+                                        Navigator.pushNamed(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (context) => DetailMovieSearchPage(indexes: index),
-                                          ),
+                                          '/detailSearch',
+                                          arguments: {
+                                            'indexes': index,
+                                          }
                                         );
                                       },
                                     ),

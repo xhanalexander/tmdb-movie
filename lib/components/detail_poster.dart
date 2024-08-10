@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class MoviePoster extends StatelessWidget {
   final String image;
+  final VoidCallback onClick;
 
   const MoviePoster({
     super.key,
     required this.image,
+    required this.onClick,
   });
 
   @override

@@ -47,20 +47,17 @@ class MovieCards extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: borderRadius,
-                    child: InkWell(
-                      onLongPress: onHolds,
-                      child: CachedNetworkImage(
-                        imageUrl: image,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: double.infinity,
-                        placeholder: (context, url) => Container(
-                          color: Colors.purple[300]!.withOpacity(0.5),
-                            child: const Center(child: CircularProgressIndicator()),
-                        ),
-                        errorWidget: (context, url, error) => Container(
-                          color: Colors.grey[300],
-                        ),
+                    child: CachedNetworkImage(
+                      imageUrl: image,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                      placeholder: (context, url) => Container(
+                        color: Colors.purple[300]!.withOpacity(0.5),
+                          child: const Center(child: CircularProgressIndicator()),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        color: Colors.grey[300],
                       ),
                     ),
                   ),
@@ -86,7 +83,7 @@ class MovieCards extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 24,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

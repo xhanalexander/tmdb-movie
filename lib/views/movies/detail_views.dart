@@ -78,6 +78,7 @@ class _DetailMoviePlayPageState extends State<DetailMoviePlayPage> {
                   tag: details.moviesNowPlaying![widget.indexes].id.toString(),
                   child: MoviePoster(
                     image: Constant.imagePoster + details.moviesNowPlaying![widget.indexes].posterPath!,
+                    onClick: () {},
                   ),
                 ),
             const SizedBox(height: 20),
@@ -182,42 +183,38 @@ class _DetailMoviePlayPageState extends State<DetailMoviePlayPage> {
                     style: TextStyleSystem().heading2Style,
                   ),
                   const SizedBox(height: 20),
-
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 2.5, 
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 6,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const Padding(padding: EdgeInsets.symmetric(horizontal: 8));
-                        },
-                        itemBuilder: (BuildContext context, int index) {
-                          return MovieCards(
-                            constantWidth: 0.5,
-                            constantHeight: 0.4,
-                            title: "",
-                            image: Constant.imagePoster + details.moviesSimmilar![index].posterPath!,
-                            onClick: () {},
-                            onHolds: () {
-                              debugPrint('Holded');
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-
-
-
                 ],
               ),
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 2.5, 
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: 6,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Padding(padding: EdgeInsets.symmetric(horizontal: 8));
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return MovieCards(
+                        constantWidth: 0.5,
+                        constantHeight: 0.4,
+                        title: details.moviesSimmilar![index].title!,
+                        image: Constant.imagePoster + details.moviesSimmilar![index].posterPath!,
+                        onClick: () {},
+                        onHolds: () {},
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -294,6 +291,7 @@ class _DetailMoviePopularPageState extends State<DetailMoviePopularPage> {
                   tag: details.moviesPopular![widget.indexes].id!,
                   child: MoviePoster(
                     image: Constant.imagePoster + details.moviesPopular![widget.indexes].posterPath.toString(),
+                    onClick: () {},
                   ),
                 ),
             const SizedBox(height: 20),
@@ -398,36 +396,38 @@ class _DetailMoviePopularPageState extends State<DetailMoviePopularPage> {
                     style: TextStyleSystem().heading2Style,
                   ),
                   const SizedBox(height: 20),
-
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 2.5, 
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 6,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const Padding(padding: EdgeInsets.symmetric(horizontal: 8));
-                        },
-                        itemBuilder: (BuildContext context, int index) {
-                          return MovieCards(
-                            constantWidth: 0.5,
-                            constantHeight: 0.4,
-                            title: details.moviesSimmilar![index].title!,
-                            image: Constant.imagePoster + details.moviesSimmilar![index].posterPath!,
-                            onClick: () {},
-                            onHolds: () {},
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
                 ],
               ),
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 2.5, 
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: 6,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Padding(padding: EdgeInsets.symmetric(horizontal: 8));
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return MovieCards(
+                        constantWidth: 0.5,
+                        constantHeight: 0.4,
+                        title: details.moviesSimmilar![index].title!,
+                        image: Constant.imagePoster + details.moviesSimmilar![index].posterPath!,
+                        onClick: () {},
+                        onHolds: () {},
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -462,7 +462,7 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    final details = Provider.of<MoviesViewModel>(context);
+    final res = Provider.of<MoviesViewModel>(context);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -472,7 +472,7 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
         childs: [
           IconButton(
             onPressed: () {
-                details.addWishlist(details.moviesSearch![widget.indexes]);
+                res.addWishlist(res.moviesSearch![widget.indexes]);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Added to Favorites'),
@@ -481,10 +481,10 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
                 );
               },
             icon: Icon(
-              details.wishlist!.any((element) => element.id == details.moviesPopular![widget.indexes].id)
+              res.wishlist!.any((element) => element.id == res.moviesPopular![widget.indexes].id)
                 ? Icons.favorite
                 : Icons.favorite_border,
-              color: details.wishlist!.any((element) => element.id == details.moviesPopular![widget.indexes].id)
+              color: res.wishlist!.any((element) => element.id == res.moviesPopular![widget.indexes].id)
                 ? Colors.red
                 : Colors.white,
             )
@@ -496,13 +496,14 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            details.dataStatus == Status.loading
+            res.dataStatus == Status.loading
               ? const Loadings(
                   constantWidth: 1,
                   constantHeight: 0.8,
               )
               : MoviePoster(
-                image: Constant.imagePoster + details.moviesSearch![widget.indexes].posterPath!,
+                image: Constant.imagePoster + res.moviesSearch![widget.indexes].posterPath!,
+                onClick: () {},
               ),
             const SizedBox(height: 20),
             
@@ -515,13 +516,13 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
                 children: [
                   Flexible(
                     flex: 3,
-                    child: details.dataStatus == Status.loading
+                    child: res.dataStatus == Status.loading
                       ? const Loadings(
                           constantWidth: double.infinity,
                           constantHeight: 0.04,
                         )
                       : Text(
-                        details.moviesSearch![widget.indexes].title!.toString(),
+                        res.moviesSearch![widget.indexes].title!.toString(),
                         style: TextStyleSystem().heading1Style,
                     )
                   ),
@@ -535,13 +536,13 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
                           color: Colors.yellow[700],
                         ),
                         const SizedBox(width: 5),
-                        details.dataStatus == Status.loading
+                        res.dataStatus == Status.loading
                           ? const Loadings(
                               constantWidth: 0.1,
                               constantHeight: 0.04,
                             )
                           : Text(
-                            details.moviesSearch![widget.indexes].voteAverage.toString().substring(0, 3),
+                            res.moviesSearch![widget.indexes].voteAverage.toString().substring(0, 3),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -573,13 +574,13 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
                     "Description",
                     style: TextStyleSystem().heading2Style,
                   ),
-                  details.dataStatus == Status.loading
+                  res.dataStatus == Status.loading
                     ? const Loadings(
                         constantWidth: double.infinity,
                         constantHeight: 0.2,
                       )
                     : Text(
-                      details.moviesSearch![widget.indexes].overview!,
+                      res.moviesSearch![widget.indexes].overview!,
                       style: TextStyleSystem().bodyStyle,
                       textAlign: TextAlign.justify,
                   ),
@@ -589,13 +590,13 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
                     "Language",
                     style: TextStyleSystem().heading2Style,
                   ),
-                  details.dataStatus == Status.loading
+                  res.dataStatus == Status.loading
                     ? const Loadings(
                         constantWidth: double.infinity,
                         constantHeight: 0.04,
                       )
                     : Text(
-                      details.moviesSearch![widget.indexes].originalLanguage!,
+                      res.moviesSearch![widget.indexes].originalLanguage!,
                       style: TextStyleSystem().bodyStyle,
                   ),
                   const SizedBox(height: 20),
@@ -606,36 +607,41 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
                     style: TextStyleSystem().heading2Style,
                   ),
                   const SizedBox(height: 20),
-
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 2.5, 
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 6,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const Padding(padding: EdgeInsets.symmetric(horizontal: 8));
-                        },
-                        itemBuilder: (BuildContext context, int index) {
-                          return MovieCards(
-                            constantWidth: 0.5,
-                            constantHeight: 0.4,
-                            title: "",
-                            image: Constant.imagePoster + details.moviesSimmilar![index].posterPath!,
-                            onClick: () {},
-                            onHolds: () {},
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
                 ],
               ),
             ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 2.5,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: 6,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Padding(padding: EdgeInsets.symmetric(horizontal: 8));
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return MovieCards(
+                        constantWidth: 0.5,
+                        constantHeight: 0.4,
+                        title: res.moviesSimmilar![index].title!,
+                        image: Constant.imagePoster + res.moviesSimmilar![index].posterPath!,
+                        onClick: () {
+                          debugPrint('index: $index');
+                          debugPrint('titles: ${res.moviesSimmilar![index].title}');
+                        },
+                        onHolds: () {},
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
