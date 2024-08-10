@@ -6,6 +6,7 @@ const borderRadiuss = BorderRadius.all(Radius.circular(10));
 class MovieCards extends StatelessWidget {
   final BorderRadius borderRadius;
   final VoidCallback onClick;
+  final VoidCallback onHolds;
   final String image;
   final String title;
   // final String herotags;
@@ -15,6 +16,7 @@ class MovieCards extends StatelessWidget {
   const MovieCards({
     super.key,
     required this.onClick,
+    required this.onHolds,
     required this.image,
     required this.title,
     // required this.herotags,
@@ -45,17 +47,20 @@ class MovieCards extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: borderRadius,
-                    child: CachedNetworkImage(
-                      imageUrl: image,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
-                      placeholder: (context, url) => Container(
-                        color: Colors.purple[300]!.withOpacity(0.5),
-                          child: const Center(child: CircularProgressIndicator()),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        color: Colors.grey[300],
+                    child: InkWell(
+                      onLongPress: onHolds,
+                      child: CachedNetworkImage(
+                        imageUrl: image,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                        placeholder: (context, url) => Container(
+                          color: Colors.purple[300]!.withOpacity(0.5),
+                            child: const Center(child: CircularProgressIndicator()),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          color: Colors.grey[300],
+                        ),
                       ),
                     ),
                   ),

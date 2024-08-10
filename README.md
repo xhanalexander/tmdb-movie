@@ -1,6 +1,6 @@
 # tmdbapp
 
-A new Flutter project.
+Flutter movie project from TMDB api
 
 ## Getting Started
 
@@ -24,3 +24,23 @@ flutter cd moviesapp
 ```
 flutter run
 ```
+
+### Login
+
+For the login use username and password `admin`. 
+
+### Package
+- Dio HTTP requests.
+- cache network image
+- state management Providers
+- shared preferences local storages
+- MVVM architecture
+
+### Screenshots
+
+|   |   |
+|---|---|
+| ![](lib/assets/images/home%20view.png)  | ![](lib/assets/images/detail%20view.png)  |
+| Home view  | Detail movie view  |
+|  ![](lib/assets/images/search%20view.png) | ![](lib/assets/images/similar%20view.png)  |
+| Search view  | Similar genre view  |

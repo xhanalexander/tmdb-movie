@@ -6,7 +6,6 @@ import 'package:tmdbapp/components/detail_poster.dart';
 import 'package:tmdbapp/components/shimmer.dart';
 import 'package:tmdbapp/constant/constant.dart';
 import 'package:tmdbapp/constant/design_system.dart';
-import 'package:tmdbapp/models/api/movies_api.dart';
 import 'package:tmdbapp/view_models/movies_view_models.dart';
 
 // -------------------------------------------------------- Now Playing -------------------------------------------------------- //
@@ -46,13 +45,13 @@ class _DetailMoviePlayPageState extends State<DetailMoviePlayPage> {
         childs: [
           IconButton(
             onPressed: () {
-                /* details.addWishlist(details.moviesNowPlaying![widget.indexes]);
+                details.addWishlist(details.moviesNowPlaying![widget.indexes]);
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Added to Favorites'),
                     duration: Duration(seconds: 1),
                   ),
-                ); */
+                );
               },
             icon: Icon(
               details.wishlist!.any((element) => element.id == details.moviesPopular![widget.indexes].id)
@@ -202,7 +201,10 @@ class _DetailMoviePlayPageState extends State<DetailMoviePlayPage> {
                             constantHeight: 0.4,
                             title: "",
                             image: Constant.imagePoster + details.moviesSimmilar![index].posterPath!,
-                            onClick: () {}
+                            onClick: () {},
+                            onHolds: () {
+                              debugPrint('Holded');
+                            },
                           );
                         },
                       ),
@@ -415,7 +417,8 @@ class _DetailMoviePopularPageState extends State<DetailMoviePopularPage> {
                             constantHeight: 0.4,
                             title: details.moviesSimmilar![index].title!,
                             image: Constant.imagePoster + details.moviesSimmilar![index].posterPath!,
-                            onClick: () {}
+                            onClick: () {},
+                            onHolds: () {},
                           );
                         },
                       ),
@@ -622,7 +625,8 @@ class _DetailMovieSearchPageState extends State<DetailMovieSearchPage> {
                             constantHeight: 0.4,
                             title: "",
                             image: Constant.imagePoster + details.moviesSimmilar![index].posterPath!,
-                            onClick: () {}
+                            onClick: () {},
+                            onHolds: () {},
                           );
                         },
                       ),

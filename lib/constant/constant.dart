@@ -7,7 +7,7 @@ class Constant {
   static const String nameValidator = "Mohon diisi nama!";
 
   static const String defaultUsername = "admin";
-  static const String defaultPassword = "admin";
+  static const String defaultPassword = defaultUsername;
 
   static String apiKey = "b682547715ab6b7b52002a64201cce05";
   static String accountId = "21424123";

@@ -133,6 +133,7 @@ class _CinemaPagesState extends State<CinemaPages> {
                                   builder: (context) => DetailMoviePlayPage(indexes: index)
                                 ),
                               ),
+                              onHolds: () {},
                             ),
                           );
                         },
@@ -226,7 +227,8 @@ class _CinemaPagesState extends State<CinemaPages> {
                                 MaterialPageRoute(
                                   builder: (context) => DetailMoviePopularPage(indexes: index)
                                 )
-                              )
+                              ),
+                              onHolds: () {},
                             ),
                           );
                         },
